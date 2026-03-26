@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <title>Controle financeiro</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>Controle de Gastos</h1>
+  </header>
+
+  <div class="container">
+
+    <!-- RESUMO -->
+    <div class="box resumo">
+      <div><strong>Receitas:</strong> R$ <span id="totalReceitas">0,00</span></div>
+      <div><strong>Despesas:</strong> R$ <span id="totalDespesas">0,00</span></div>
+      <div><strong>Saldo:</strong> R$ <span id="saldo">0,00</span></div>
+    </div>
+
+    <div class="form-row">
+
+      <!-- RECEITA -->
+      <div class="box">
+        <h3>Adicionar Receita</h3>
+        <input type="text" id="descReceita" placeholder="Descrição (salário, freelance)">
+        <input type="number" id="valorReceita" placeholder="Valor">
+        <input type="date" id="dataReceita">
+        <button class="btn-receita" onclick="addReceita()">Adicionar Receita</button>
+      </div>
+
+      <!-- DESPESA -->
+      <div class="box">
+        <h3>Adicionar Despesa</h3>
+        <input type="text" id="descDespesa" placeholder="Descrição">
+        <input type="number" id="valorDespesa" placeholder="Valor">
+        <input type="date" id="dataDespesa">
+        <button class="btn-despesa" onclick="addDespesa()">Adicionar Despesa</button>
+      </div>
+
+    </div>
+
+    <!-- LISTA -->
+    <div class="box">
+      
+      <div style="display: flex; align-items: center; gap: 20px; align-items: baseline;">
+        <h3>Movimentações</h3>
+        <div class="radioButton">  
+          <input type="radio" name="filtro" value="todos" checked>
+          <label for="todos">Todas</label>
+        </div>
+        <div class="radioButton">  
+          <input type="radio" name="filtro" value="receitas">
+          <label for="receitas">Receitas</label>
+        </div>
+        <div class="radioButton">  
+          <input type="radio" name="filtro" value="despesas">
+          <label for="despesas">Despesas</label>
+        </div>
+      </div>
+      <input type="text" id="busca" placeholder="Filtrar movimentações" oninput="filtrarLista()">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Data</th>
+            <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+          </tr>
+        </thead>
+        <tbody id="lista"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>

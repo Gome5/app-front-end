@@ -1,0 +1,80 @@
+body {
+  font-family: tahoma;
+  background: #f4f4f4;
+  margin: 0;
+}
+
+header {
+  background: #2c6ebd;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  text-transform: uppercase;
+}
+
+.container {
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.box {
+  background: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 5px;
+  width: 95%;
+  margin: 5px 0 10px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 5px;
+}
+
+.radioButton {
+  display: flex; 
+  margin-left: 10px; 
+  gap: 5px;
+}
+
+.btn-despesa {
+  background: #e74c3c;
+}
+
+.btn-receita {
+  background: #2ecc71;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border-bottom: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.resumo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .box {
+  flex: 1;
+}
