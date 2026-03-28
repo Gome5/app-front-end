@@ -78,3 +78,10 @@ th, td {
 .form-row .box {
   flex: 1;
 }
+
+#myRadioSchema {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+  align-items: baseline;
+}

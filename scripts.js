@@ -1,6 +1,40 @@
 let receitas = [];
 let despesas = [];
 
+/*
+  --------------------------------------------------------------------------------------
+  Função para obter a lista existente do servidor via requisição GET
+  --------------------------------------------------------------------------------------
+*/
+const getReceitas = async () => {
+  let url = 'http://192.168.1.112:5000/receita';
+
+  fetch(url, {
+    method: 'get',
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      data.receitas.forEach(item => {
+        receitas.push({
+          desc: item.descricao,
+          valor: parseFloat(item.valor),
+          data: item.data_entrada
+        });
+      });
+      atualizarTela();
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+getReceitas();
+
 function addReceita() {
   const desc = document.getElementById("descReceita").value;
   const valor = parseFloat(document.getElementById("valorReceita").value);
@@ -11,9 +45,8 @@ function addReceita() {
     return;
   }
 
-  receitas.push({ desc, valor, data });
   limparCamposReceita();
-  atualizarTela();
+  postItem(desc, valor, data);
 }
 
 function addDespesa() {
@@ -94,4 +127,32 @@ function filtrarLista() {
       linha.style.display = "none";
     }
   });
+}
+
+/*
+  --------------------------------------------------------------------------------------
+  Função para colocar um item na lista do servidor via requisição POST
+  --------------------------------------------------------------------------------------
+*/
+const postItem = async (inputDesc, inputValue, inputDate) => {
+  const formData = new FormData();
+  formData.append('descricao', inputDesc);
+  formData.append('valor', inputValue);
+  formData.append('data', inputDate);
+
+  console.log('FormData:', formData.get('descricao'), formData.get('valor'), formData.get('data'));
+  let url = 'http://192.168.1.112:5000/receita';
+  fetch(url, {
+    method: 'post',
+    body: formData
+  })
+    .then((response) => {
+      if(!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      console.log(response.json());
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
