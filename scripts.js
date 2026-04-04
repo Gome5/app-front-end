@@ -19,7 +19,7 @@ function limparCamposDespesa() {
   --------------------------------------------------------------------------------------
 */
 const getReceitas = async () => {
-  let url = 'http://192.168.1.112:5000/receita';
+  let url = 'http://192.168.1.114:5000/receita';
 
   fetch(url, {
     method: 'get',
@@ -32,6 +32,7 @@ const getReceitas = async () => {
     })
     .then((data) => {
       data.receitas.forEach(item => {
+        console.log('Receita:', item);
         receitas.push({
           id: item.id,
           desc: item.descricao,
@@ -54,7 +55,7 @@ getReceitas();
   --------------------------------------------------------------------------------------
 */
 const getDespesas = async () => {
-  let url = 'http://192.168.1.112:5000/despesas';
+  let url = 'http://192.168.1.114:5000/despesas';
 
   fetch(url, {
     method: 'get',
@@ -67,6 +68,7 @@ const getDespesas = async () => {
     })
     .then((data) => {
       data.despesas.forEach(item => {
+        console.log('Despesa:', item);
         despesas.push({
           id: item.id,
           desc: item.descricao,
@@ -128,7 +130,7 @@ function atualizarTela() {
         <td>R$ ${r.valor.toFixed(2)}</td>
         <td>${r.data}</td>
         <td>
-          <img class="btn-excluir" src="https://cdn-icons-png.flaticon.com/512/126/126468.png" onClick="deletarItem(${d.id}, 'despesa')">
+          <img class="btn-excluir" src="https://cdn-icons-png.flaticon.com/512/126/126468.png" onClick="deletarItem(${r.id}, 'receita')">
         </td>
       </tr>
     `;
@@ -184,9 +186,9 @@ const postItem = async (inputDesc, inputValue, inputDate, type) => {
   console.log('FormData:', formData.get('descricao'), formData.get('valor'), formData.get('data'));
   let url = '';
   if(type === "receita") {
-    url = 'http://192.168.1.112:5000/receita';
+    url = 'http://192.168.1.114:5000/receita';
   } else if(type === "despesa") {
-    url = 'http://192.168.1.112:5000/despesa';
+    url = 'http://192.168.1.114:5000/despesa';
   }
   fetch(url, {
     method: 'post',
@@ -197,8 +199,10 @@ const postItem = async (inputDesc, inputValue, inputDate, type) => {
         throw new Error('Network response was not ok ' + response.statusText);
       }
       if(type === "receita") {
+        receitas = [];
         getReceitas();
       } else if(type === "despesa") {
+        despesas = [];
         getDespesas();
       }
     })
@@ -214,9 +218,9 @@ const deletarItem = (id, tipo) => {
   let url = '';
 
   if (tipo === 'receita') {
-    url = `http://192.168.1.112:5000/receita?id=${id}`;
+    url = 'http://192.168.1.114:5000/receita?id=' + id;
   } else {
-    url = `http://192.168.1.112:5000/despesa?id=${id}`;
+    url = 'http://192.168.1.114:5000/despesa?id=' + id;
   }
 
   fetch(url, {
@@ -226,9 +230,12 @@ const deletarItem = (id, tipo) => {
       if (!response.ok) throw new Error('Erro ao deletar');
 
       alert('Item excluído com sucesso!');
+      receitas = [];
+      despesas = [];
 
-      getReceitas();
       getDespesas();
+      getReceitas();
+
     })
     .catch(error => {
       console.error(error);
