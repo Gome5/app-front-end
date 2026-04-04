@@ -13,6 +13,11 @@ function limparCamposDespesa() {
   document.getElementById("dataDespesa").value = "";
 }
 
+function getFiltroSelecionado() {
+  const radio = document.querySelector('input[name="filtro"]:checked');
+  return radio.value;
+}
+
 /*
   --------------------------------------------------------------------------------------
   Função para obter a lista existente do servidor via requisição GET
@@ -120,37 +125,45 @@ function atualizarTela() {
   let totalReceitas = 0;
   let totalDespesas = 0;
 
-  receitas.forEach(r => {
-    totalReceitas += r.valor;
+  const filtro = getFiltroSelecionado();
 
-    lista.innerHTML += `
-      <tr>
-        <td>Receita</td>
-        <td>${r.desc}</td>
-        <td>R$ ${r.valor.toFixed(2)}</td>
-        <td>${r.data}</td>
-        <td>
-          <img class="btn-excluir" src="https://cdn-icons-png.flaticon.com/512/126/126468.png" onClick="deletarItem(${r.id}, 'receita')">
-        </td>
-      </tr>
-    `;
-  });
+  if (filtro === "todos" || filtro === "receitas") {
+    receitas.forEach(r => {
+      totalReceitas += r.valor;
 
-  despesas.forEach(d => {
-    totalDespesas += d.valor;
+      lista.innerHTML += `
+        <tr>
+          <td>Receita</td>
+          <td>${r.desc}</td>
+          <td>R$ ${r.valor.toFixed(2)}</td>
+          <td>${r.data}</td>
+          <td>
+            <img class="btn-excluir" src="https://cdn-icons-png.flaticon.com/512/126/126468.png"
+            onClick="deletarItem(${r.id}, 'receita')">
+          </td>
+        </tr>
+      `;
+    });
+  }
 
-    lista.innerHTML += `
-      <tr>
-        <td>Despesa</td>
-        <td>${d.desc}</td>
-        <td>R$ ${d.valor.toFixed(2)}</td>
-        <td>${d.data}</td>
-        <td>
-          <img class="btn-excluir" src="https://cdn-icons-png.flaticon.com/512/126/126468.png" onClick="deletarItem(${d.id}, 'despesa')">
-        </td>
-      </tr>
-    `;
-  });
+  if (filtro === "todos" || filtro === "despesas") {
+    despesas.forEach(d => {
+      totalDespesas += d.valor;
+
+      lista.innerHTML += `
+        <tr>
+          <td>Despesa</td>
+          <td>${d.desc}</td>
+          <td>R$ ${d.valor.toFixed(2)}</td>
+          <td>${d.data}</td>
+          <td>
+            <img class="btn-excluir" src="https://cdn-icons-png.flaticon.com/512/126/126468.png"
+            onClick="deletarItem(${d.id}, 'despesa')">
+          </td>
+        </tr>
+      `;
+    });
+  }
 
   document.getElementById("totalReceitas").innerText = totalReceitas.toFixed(2);
   document.getElementById("totalDespesas").innerText = totalDespesas.toFixed(2);
@@ -242,3 +255,10 @@ const deletarItem = (id, tipo) => {
       alert('Erro ao excluir item');
     });
 };
+
+document.querySelectorAll('input[name="filtro"]').forEach(radio => {
+  radio.addEventListener("change", () => {
+    document.getElementById("busca").value = "";
+    atualizarTela();
+  });
+});
