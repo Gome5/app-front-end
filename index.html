@@ -32,7 +32,7 @@
       <div class="box">
         <h3>Adicionar Receita</h3>
         <input type="text" id="descReceita" placeholder="Descrição (salário, freelance)">
-        <input type="number" id="valorReceita" placeholder="Valor">
+        <input type="number" id="valorReceita" placeholder="Valor" min="0">
         <input type="date" id="dataReceita">
         <button class="btn-receita" onclick="addReceita()">Adicionar Receita</button>
       </div>
@@ -41,7 +41,7 @@
       <div class="box">
         <h3>Adicionar Despesa</h3>
         <input type="text" id="descDespesa" placeholder="Descrição">
-        <input type="number" id="valorDespesa" placeholder="Valor">
+        <input type="number" id="valorDespesa" placeholder="Valor" min="0">
         <input type="date" id="dataDespesa">
         <button class="btn-despesa" onclick="addDespesa()">Adicionar Despesa</button>
       </div>
@@ -74,7 +74,7 @@
             <th>Descrição</th>
             <th>Valor</th>
             <th>Data</th>
-            <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody id="lista"></tbody>

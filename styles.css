@@ -85,3 +85,15 @@ th, td {
   margin-bottom: 10px;
   align-items: baseline;
 }
+
+.btn-excluir {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  padding: 15px;
+  transition: transform 0.2s;
+}
+
+.btn-excluir:hover {
+  transform: scale(1.2);
+}
