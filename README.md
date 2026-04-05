@@ -31,7 +31,7 @@ Este projeto é uma interface web que permite ao usuário:
 ### 1. Clonar ou baixar o projeto
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
+git clone https://github.com/Gome5/app-front-end.git
 ```
 
 ---
