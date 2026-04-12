@@ -53,7 +53,7 @@ no navegador.
 O frontend consome uma API rodando em:
 
 ```
-http://192.168.1.114:5000
+http://localhost:5000
 ```
 
 ### Endpoints utilizados:

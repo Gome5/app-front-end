@@ -24,7 +24,7 @@ function getFiltroSelecionado() {
   --------------------------------------------------------------------------------------
 */
 const getReceitas = async () => {
-  let url = 'http://192.168.1.114:5000/receita';
+  let url = 'http://localhost:5000/receita';
 
   fetch(url, {
     method: 'get',
@@ -60,7 +60,7 @@ getReceitas();
   --------------------------------------------------------------------------------------
 */
 const getDespesas = async () => {
-  let url = 'http://192.168.1.114:5000/despesas';
+  let url = 'http://localhost:5000/despesas';
 
   fetch(url, {
     method: 'get',
@@ -199,9 +199,9 @@ const postItem = async (inputDesc, inputValue, inputDate, type) => {
   console.log('FormData:', formData.get('descricao'), formData.get('valor'), formData.get('data'));
   let url = '';
   if(type === "receita") {
-    url = 'http://192.168.1.114:5000/receita';
+    url = 'http://localhost:5000/receita';
   } else if(type === "despesa") {
-    url = 'http://192.168.1.114:5000/despesa';
+    url = 'http://localhost:5000/despesa';
   }
   fetch(url, {
     method: 'post',
@@ -231,9 +231,9 @@ const deletarItem = (id, tipo) => {
   let url = '';
 
   if (tipo === 'receita') {
-    url = 'http://192.168.1.114:5000/receita?id=' + id;
+    url = 'http://localhost:5000/receita?id=' + id;
   } else {
-    url = 'http://192.168.1.114:5000/despesa?id=' + id;
+    url = 'http://localhost:5000/despesa?id=' + id;
   }
 
   fetch(url, {
